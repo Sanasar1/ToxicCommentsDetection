@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: toxicity
+
+service:
+  toxicity-detection:
+    url: http://localhost:8000/predict
