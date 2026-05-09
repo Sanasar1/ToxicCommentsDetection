@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Civil - Login</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<nav id="nav"></nav>
+<main class="container narrow">
+  <div class="card">
+    <h2>Log in</h2>
+    <form id="login-form">
+      <label>Username
+        <input type="text" name="username" required autocomplete="username">
+      </label>
+      <label>Password
+        <input type="password" name="password" required autocomplete="current-password">
+      </label>
+      <button type="submit">Log in</button>
+      <p id="login-error" class="error"></p>
+    </form>
+    <p>No account? <a href="/register.html">Register</a></p>
+  </div>
+</main>
+<script src="/static/api.js"></script>
+<script src="/static/auth.js"></script>
+</body>
+</html>

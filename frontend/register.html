@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Civil - Register</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<nav id="nav"></nav>
+<main class="container narrow">
+  <div class="card">
+    <h2>Create an account</h2>
+    <form id="register-form">
+      <label>Username
+        <input type="text" name="username" required pattern="[A-Za-z0-9_]{3,30}"
+               title="3-30 letters, digits, or underscores" autocomplete="username">
+      </label>
+      <label>Display name
+        <input type="text" name="displayName" required maxlength="100">
+      </label>
+      <label>Password
+        <input type="password" name="password" required minlength="6" autocomplete="new-password">
+      </label>
+      <button type="submit">Register</button>
+      <p id="register-error" class="error"></p>
+    </form>
+    <p>Already have an account? <a href="/login.html">Log in</a></p>
+  </div>
+</main>
+<script src="/static/api.js"></script>
+<script src="/static/auth.js"></script>
+</body>
+</html>

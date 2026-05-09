@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Civil - Post</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<nav id="nav"></nav>
+<main class="container">
+  <div id="post-container"></div>
+  <section class="card">
+    <h3>Comments</h3>
+    <form id="comment-form" class="hidden">
+      <textarea name="content" rows="2" maxlength="1000" placeholder="Write a comment..." required></textarea>
+      <div class="row">
+        <button type="submit">Comment</button>
+        <span id="comment-status" class="status"></span>
+      </div>
+    </form>
+    <div id="comments-list"></div>
+    <p id="comments-empty" class="muted hidden">No comments yet.</p>
+  </section>
+</main>
+<script src="/static/api.js"></script>
+<script src="/static/post.js"></script>
+</body>
+</html>

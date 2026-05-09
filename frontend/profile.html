@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Civil - Profile</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<nav id="nav"></nav>
+<main class="container">
+  <section id="profile-card" class="card">
+    <div id="profile-header"></div>
+    <div id="profile-stats" class="stats"></div>
+    <div id="profile-bio" class="muted"></div>
+    <div class="row">
+      <button id="follow-btn" class="hidden"></button>
+      <button id="edit-btn" class="hidden">Edit profile</button>
+    </div>
+    <form id="edit-form" class="hidden">
+      <label>Display name
+        <input type="text" name="displayName" maxlength="100">
+      </label>
+      <label>Bio
+        <textarea name="bio" rows="3" maxlength="500"></textarea>
+      </label>
+      <div class="row">
+        <button type="submit">Save</button>
+        <button type="button" id="edit-cancel">Cancel</button>
+      </div>
+    </form>
+  </section>
+
+  <section>
+    <h2>Posts</h2>
+    <div id="user-posts"></div>
+    <p id="user-posts-empty" class="muted hidden">No posts yet.</p>
+  </section>
+</main>
+<script src="/static/api.js"></script>
+<script src="/static/profile.js"></script>
+</body>
+</html>

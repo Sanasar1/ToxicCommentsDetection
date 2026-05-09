@@ -1,7 +1,35 @@
 spring:
   application:
     name: toxicity
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/social}
+    username: ${SPRING_DATASOURCE_USERNAME:social}
+    password: ${SPRING_DATASOURCE_PASSWORD:social}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+    open-in-view: false
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+
+server:
+  port: ${SERVER_PORT:8080}
 
 service:
   toxicity-detection:
-    url: http://localhost:8000/predict
+    url: ${SERVICE_TOXICITY_DETECTION_URL:http://localhost:8000/predict}
+
+security:
+  jwt:
+    secret: ${JWT_SECRET:civil-local-dev-jwt-signing-secret-for-localhost}
+    expiration-seconds: ${JWT_EXPIRATION_SECONDS:604800}
+
+feed:
+  fanout-cap: 200

@@ -1,0 +1,80 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: social
+      POSTGRES_USER: social
+      POSTGRES_PASSWORD: social
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U social -d social"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  toxicity-service:
+    build:
+      context: ./toxicity-service
+    image: civil-toxicity-service
+    environment:
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HUB_OFFLINE: "1"
+      MODELS_ROOT: /models
+      LEGACY_MODEL_PATH: /toxic_model
+      OBVIOUS_TOXICITY_THRESHOLD: "0.5"
+    volumes:
+      - ./toxic_model:/toxic_model:ro
+    ports:
+      - "8000:8000"
+
+  backend:
+    build:
+      context: ./toxicity/toxicity
+    image: civil-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      toxicity-service:
+        condition: service_started
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/social
+      SPRING_DATASOURCE_USERNAME: social
+      SPRING_DATASOURCE_PASSWORD: social
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: "6379"
+      SERVICE_TOXICITY_DETECTION_URL: http://toxicity-service:8000/predict
+      JWT_SECRET: ${JWT_SECRET:-civil-local-dev-jwt-signing-secret-for-localhost}
+      JWT_EXPIRATION_SECONDS: "604800"
+      SERVER_PORT: "8080"
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+    image: civil-frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
+volumes:
+  postgres_data:
+  redis_data:

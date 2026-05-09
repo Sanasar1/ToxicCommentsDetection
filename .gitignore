@@ -1,2 +1,9 @@
-/.ipynb_checkpoints
 /toxicity-service/__pycache__
+
+# не запушить из-за размера
+/toxic_model
+/model/toxic_model
+/model/.ipynb_checkpoints/
+/model/test_data.csv
+/model/train_data.csv
+/model/data.csv

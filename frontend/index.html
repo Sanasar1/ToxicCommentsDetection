@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Civil - Feed</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<nav id="nav"></nav>
+<main class="container">
+  <section id="composer-section" class="card hidden">
+    <h2>Share something</h2>
+    <textarea id="composer-text" rows="3" maxlength="2000" placeholder="What's on your mind?"></textarea>
+    <div class="row">
+      <button id="composer-submit">Post</button>
+      <span id="composer-status" class="status"></span>
+    </div>
+  </section>
+
+  <section id="feed-section">
+    <h2>Your feed</h2>
+    <div id="feed-list"></div>
+    <button id="feed-load-more" class="hidden">Load more</button>
+    <p id="feed-empty" class="muted hidden">Nothing here yet. Follow some users or write your first post.</p>
+  </section>
+</main>
+<script src="/static/api.js"></script>
+<script src="/static/feed.js"></script>
+</body>
+</html>

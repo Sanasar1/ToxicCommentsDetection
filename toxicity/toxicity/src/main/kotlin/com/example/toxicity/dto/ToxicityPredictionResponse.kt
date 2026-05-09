@@ -1,6 +1,11 @@
 package com.example.toxicity.dto
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class ToxicityPredictionResponse(
     val label: Int,
-    val probs: List<Float>?
+    @JsonProperty("rejected_by")
+    val rejectedBy: List<String>? = null,
 )
